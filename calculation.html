@@ -1,0 +1,151 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="format-detection" content="telephone=yes">
+    <title>额度测算</title>
+	<script type="text/javascript">
+        //引入该flexible.min.js
+        !function (e, t) {
+            function n() {
+                var n = l.getBoundingClientRect().width;
+                t = t || 540, n > t && (n = t);
+                var i = 100 * n / e;
+                r.innerHTML = "html{font-size:" + i + "px;}"
+            }
+
+            var i, d = document, o = window, l = d.documentElement, r = document.createElement("style");
+            if (l.firstElementChild) l.firstElementChild.appendChild(r); else {
+                var a = d.createElement("div");
+                a.appendChild(r), d.write(a.innerHTML), a = null
+            }
+            n(), o.addEventListener("resize", function () {
+                clearTimeout(i), i = setTimeout(n, 300)
+            }, !1), o.addEventListener("pageshow", function (e) {
+                e.persisted && (clearTimeout(i), i = setTimeout(n, 300))
+            }, !1), "complete" === d.readyState ? d.body.style.fontSize = "16px" : d.addEventListener("DOMContentLoaded", function (e) {
+                d.body.style.fontSize = "16px"
+            }, !1)
+        }(750, 750);
+    </script>
+	<style>html{font-size:100px;}</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background: #DAE6F6;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .form {
+            padding-bottom: .5rem;
+        }
+
+        h4 {
+            background: #2196f3;
+            color: white;
+            padding: .1rem .4rem;
+        }
+
+        li {
+            padding: .2rem .5rem;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #ccc7d6;
+            width: 100%;
+            padding: .05rem 0;
+            font-size: .4rem;
+            outline: none;
+        }
+
+        p {
+            font-size: .34rem;
+        }
+
+        button {
+            width: 86%;
+            padding: .15rem 0;
+            border: none;
+            background: #2196f3;
+            color: white;
+            margin-left: 7%;
+            margin-top: .5rem;
+            font-size: .4rem;
+        }
+
+        .model {
+            position: fixed;
+            width: 80%;
+            text-align: center;
+            left: 10%;
+            top: 25%;
+            opacity: 0;
+            height: 0;
+            color: white;
+            transition: all .3s;
+        }
+        .active {
+            background: #ff7b71;
+            padding: .2rem 0;
+            border: 1px solid #ff0057;
+            border-radius: .1rem;
+            opacity: 1;
+            height: .5rem;
+        }
+        /*.active1 {*/
+        /*    background: #1baeff;*/
+        /*    padding: .2rem 0;*/
+        /*    border: 1px solid #1baeff;*/
+        /*    border-radius: .1rem;*/
+        /*    opacity: 1;*/
+        /*    height: .5rem;*/
+        /*}*/
+    </style>
+	<script>
+	function changeInfo (){
+                var number = (parseFloat(document.getElementById("amount").value) / (12 / parseFloat(document.getElementById("collectionMonth").value - document.getElementById("payMonth").value)) * 0.7);
+				var num= Math.ceil(number);
+				//alert(num);
+				window.location.href =	"./ed.html?num=" + num + 
+										"&target=AAAAAA&companyName=" +   document.getElementById("companyName").value + 
+										"&coupYear=" + document.getElementById("coupYear").value + 
+										"&person=" + document.getElementById("person").value + 
+										"&phone=" + document.getElementById("phone").value + 
+										"&amount="+ document.getElementById("amount").value + 
+										"&collectionMonth="+ document.getElementById("collectionMonth").value + 
+										"&payMonth="+ document.getElementById("payMonth").value + 
+										"&loan="+ num;
+	};
+</script>
+</head>
+<body style="font-size: 16px;">
+<div id="app"><div class="model">
+        请完善信息
+    </div> <div class="form"><h4>基础信息</h4> 
+	<ul>
+	<li><p>您公司的名称(必填)</p> 
+	<input type="text" id="companyName"></li> <li>
+	<p>您与华为合作年限(选填)</p> 
+	<input type="number" id="coupYear" ></li> 
+	<li><p>联系人姓名(必填)</p> 
+	<input type="text" id="person"></li> 
+	<li><p>联系人电话(必填)</p> 
+	<input type="text" id="phone"></li></ul> 
+	<h4>额度测算</h4> 
+	<ul>
+	<li><p>您的上年华为采购金额(万元)
+	<input type="number" style="width: 1rem; text-align: center;" id="amount"></p></li> 
+	<li><p>您的销售发货后一般
+	<input type="number" oninput="if(value>12)value=12" style="width: 1rem; text-align: center;" id="collectionMonth">月收到货款</p></li> 
+	<li><p>您的采购一般是收货后
+	<input type="number" oninput="if(value>12)value=12" style="width: 1rem; text-align: center;" id="payMonth">月付款</p></li></ul> 
+	<button onclick="changeInfo()"/>提交</button></div></div>
+
+
+</body></html>
